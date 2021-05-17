@@ -56,10 +56,10 @@ blogapp:
   properties:
     title: "BlogApp"
     subtitle: "Skillbox Graduation Work: Simple Blog Engine"
-    phone: "+7 000 765-4321"
-    email: ${MAIL_USERNAME:konstantin.ershov@gmail.com}
-    copyright: "Konstantin Ershov"
-    copyrightFrom: "2020"
+    phone: "+79102315706"
+    email: ${MAIL_USERNAME:romashov.nikolai@gmail.com}
+    copyright: "Николай Ромашов"
+    copyrightFrom: "2021"
   settings:
     MULTIUSER_MODE: false
     POST_PREMODERATION: true
