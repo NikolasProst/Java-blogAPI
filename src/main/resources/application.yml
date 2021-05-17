@@ -1,0 +1,79 @@
+spring:
+  autoconfigure:
+    # Disable spring security
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  datasource:
+    url: ${JDBC_DATABASE_URL:}
+    username: ${JDBC_DATABASE_USERNAME:}
+    password: ${JDBC_DATABASE_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Keep the connection alive if idle for a long time (needed in production)
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    # Show or not log for each sql query
+    show-sql: true
+    hibernate:
+      # Hibernate ddl-auto:
+      #   validate - validate the schema, makes no changes to the database.
+      #   update - update the schema.
+      #   create - creates the schema, destroying previous data.
+      #   create-drop - drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
+      #   none - does nothing with the schema, makes no changes to the database
+      ddl-auto: none
+      # Naming strategy
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    # Allows Hibernate to generate SQL optimized for a particular DBMS
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        enable_lazy_load_no_trans: true
+  hikari:
+    connection-timeout: 30000
+    maximum-pool-size: 10
+  mail:
+    host: ${MAIL_HOST:}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    port: ${MAIL_PORT:}
+    protocol: ${MAIL_PROTOCOL:}
+    test-connection: true
+    properties:
+      "mail.smtp.auth": true
+      "mail.transport.protocol": ${MAIL_PROTOCOL:}
+      "mail.debug": false
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    org.springframework: INFO
+
+blogapp:
+  properties:
+    title: "BlogApp"
+    subtitle: "Skillbox Graduation Work: Simple Blog Engine"
+    phone: "+7 000 765-4321"
+    email: ${MAIL_USERNAME:konstantin.ershov@gmail.com}
+    copyright: "Konstantin Ershov"
+    copyrightFrom: "2020"
+  settings:
+    MULTIUSER_MODE: false
+    POST_PREMODERATION: true
+    STATISTICS_IS_PUBLIC: true
+  captcha:
+    code-length: 6      # chars
+    code-ttl: 1         # hours
+    code-font-size: 18
+  runners:
+    db-init-enabled: false
+    db-settings-init-enabled: false
+  upload-dir:
+    location: ${IMAGES_UPLOAD_DIR:upload}
+  telegram:
+    enabled: true
+    proxy-url: ${TELEGRAM_PROXY_URL:}
+    proxy-jwt-token: ${TELEGRAM_PROXY_JWT_AUTH_TOKEN:}
