@@ -4,6 +4,7 @@ spring:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   datasource:
     url: ${CLEARDB_DATABASE_URL:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # Keep the connection alive if idle for a long time (needed in production)
     testWhileIdle: true
     validationQuery: SELECT 1
@@ -45,7 +46,7 @@ spring:
     baseline-on-migrate: true
 
 server:
-  port: ${PORT:5000}
+  port: ${PORT:8080}
 
 logging:
   level:
